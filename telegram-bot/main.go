@@ -13,12 +13,22 @@ func FindCommand(command string) tb_commands.Command {
 	for _, c := range tb_commands.GetCommands() {
 		if c.Name == command {
 			return c
+		} else {
+			for _, alias := range c.Aliases {
+				if alias == command {
+					return c
+				}
+			}
 		}
 	}
 	return tb_commands.Command{}
 }
 
 func main() {
+	for _, cmd := range tb_commands.GetCommands() {
+		logCmdText := fmt.Sprintf("%v loaded with %v aliases", cmd.Name, len(cmd.Aliases))
+		log.Default().Println(logCmdText)
+	}
 	poller := getPoller()
 	b, err := tb.NewBot(tb.Settings{
 		Token:  config.Token,
@@ -40,8 +50,8 @@ func main() {
 					return
 				} else {
 					go c.Execute(b, m, args)
-					logMessage := fmt.Sprintf("%v execute %v on %v", m.Sender.ID, command, m.Chat.ID)
-					fmt.Println(logMessage)
+					logMessage := fmt.Sprintf("%v execute %v on %v", m.Sender.ID, c.Name, m.Chat.ID)
+					log.Default().Println(logMessage)
 				}
 			}
 		}

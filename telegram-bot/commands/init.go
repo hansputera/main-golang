@@ -15,5 +15,6 @@ type Command struct {
 func GetCommands() []Command {
 	return []Command{
 		Ping(),
+		ShortenerSID(),
 	}
 }
