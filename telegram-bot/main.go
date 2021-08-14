@@ -6,6 +6,8 @@ import (
 
 	tb_commands "telebot/commands"
 
+	events "telebot/events"
+
 	tb "gopkg.in/tucnak/telebot.v2"
 )
 
@@ -57,5 +59,11 @@ func main() {
 			}
 		}
 	})
+
+	// =============== EVENTS ================= //
+	b.Handle(tb.OnAddedToGroup, func(m *tb.Message) {
+		events.EventAddedToGroup(b, m)
+	})
+	// ======================================== //
 	b.Start()
 }
