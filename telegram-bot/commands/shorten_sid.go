@@ -22,7 +22,7 @@ func shortSIDChannel(url string, ch chan string) {
 
 func ShortenerSID() Command {
 	return Command{
-		Name:        "shorten_sid",
+		Name:        "shortensid",
 		Description: "Shorten url to s.id",
 		Aliases:     []string{"sid"},
 		OwnerOnly:   false,

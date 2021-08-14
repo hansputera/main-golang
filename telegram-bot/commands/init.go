@@ -16,5 +16,6 @@ func GetCommands() []Command {
 	return []Command{
 		Ping(),
 		ShortenerSID(),
+		Help(),
 	}
 }
