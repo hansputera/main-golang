@@ -31,7 +31,7 @@ func main() {
 	}
 	poller := getPoller()
 	b, err := tb.NewBot(tb.Settings{
-		Token:  config.Token,
+		Token:  Token,
 		Poller: tb.NewMiddlewarePoller(poller, getRatelimitMiddleware),
 	})
 	if err != nil {
@@ -43,7 +43,7 @@ func main() {
 		if command != "" {
 			c := FindCommand(command)
 			if len(c.Name) > 0 {
-				if c.OwnerOnly && m.Sender.ID != config.OwnerID {
+				if c.OwnerOnly && m.Sender.ID != OwnerID {
 					b.Send(m.Chat, "You are not allowed to use this command.")
 					return
 				} else if c.PrivateOnly && m.Chat.Type != "private" {

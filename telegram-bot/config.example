@@ -2,14 +2,8 @@ package main
 
 import "time"
 
-type Config struct {
-	Token    string
-	Cooldown time.Duration
-	OwnerID  int
-}
-
-var config Config = Config{
-	Token:    "YOUR_BOT_TOKEN",
-	Cooldown: 5 * time.Second,
-	OwnerID:  1803044735, // change it to your telegram ID
-}
+const (
+	Token    = "YOUR_BOT_TOKEN"
+	Cooldown = 5 * time.Second
+	OwnerID  = 1803044735
+)

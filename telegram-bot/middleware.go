@@ -23,7 +23,7 @@ func IsRatelimited(userId int) bool {
 
 func RatelimitHandle(userId int) {
 	ratelimit_users = append(ratelimit_users, userId)
-	time.Sleep(config.Cooldown)
+	time.Sleep(Cooldown)
 	index := len(ratelimit_users) - 1
 	ratelimit_users = append(ratelimit_users[:index], ratelimit_users[index+1:]...)
 }
@@ -31,7 +31,7 @@ func RatelimitHandle(userId int) {
 func getRatelimitMiddleware(update *tb.Update) bool {
 	if update.Message != nil {
 		sender := update.Message.Sender
-		if sender.ID == config.OwnerID {
+		if sender.ID == OwnerID {
 			return true
 		} else {
 			if IsRatelimited(sender.ID) {
