@@ -37,8 +37,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	registerCommands(b)
 	b.Handle(tb.OnText, func(m *tb.Message) {
-		command, args := parseCommand(m.Text, m.Entities)
+		command, args := parseCommand(b, m.Text, m.Entities)
 		if command != "" {
 			c := FindCommand(command)
 			if len(c.Name) > 0 {
